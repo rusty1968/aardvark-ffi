@@ -25,6 +25,8 @@ static mut INSTANCE: Option<AardvarkApi> = None;
 #[derive(Debug)]
 pub struct AardvarkError(std::num::NonZeroI32);
 
+impl std::error::Error for AardvarkError {}
+
 impl AardvarkError {
     pub const fn new_from_const(status: c_int) -> Self {
         match NonZeroI32::new(status) {
