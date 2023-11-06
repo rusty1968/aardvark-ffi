@@ -6,7 +6,7 @@ use aardvark_ffi as aardvark;
 // MAIN PROGRAM ENTRY POINT
 //=========================================================================
 fn main() {
-    let api = unsafe { aardvark::AardvarkApi::try_load("./dynamic-lib/libaardvark.so").unwrap() };
+    let api = unsafe { aardvark::AardvarkApi::try_load("./dynamic-lib/aardvark.so").unwrap() };
     let mut devices: [u16; 16] = [0; 16];
     let mut unique_ids: [u32; 16] = [0; 16];
 

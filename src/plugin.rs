@@ -40,8 +40,7 @@ impl AardvarkError {
             None => panic!("AardvarkError cannot be 0"),
         }
     }
-    pub const UNABLE_TO_LOAD_LIBRARY: AardvarkError =
-        AardvarkError::new_from_const(AardvarkStatus_AA_UNABLE_TO_LOAD_LIBRARY);
+    pub const UNABLE_TO_FIND_UNUSED_DEVICE: AardvarkError = AardvarkError::new_from_const(0x0001);
 }
 impl From<AardvarkError> for core::num::NonZeroI32 {
     fn from(val: AardvarkError) -> Self {
@@ -179,9 +178,6 @@ impl AardvarkApi {
     /// Otherwise, return the struct.
     /// # Safety
     pub unsafe fn try_load(lib_path: &str) -> Result<Self, Box<dyn Error>> {
-        if !Path::new(lib_path).exists() {
-            return Err(format!("{} does not exist", lib_path).into());
-        }
         let library = Library::new(lib_path)?;
 
         let aa_i2c_read = library.get(b"c_aa_i2c_read\0")?;
